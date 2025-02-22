@@ -1,0 +1,13 @@
+.avatar {
+  position: relative;
+}
+.status {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border: white 2px solid;
+  border-radius: 50%;
+  background-color: #4caf50;
+}
