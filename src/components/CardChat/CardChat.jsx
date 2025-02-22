@@ -52,7 +52,7 @@ const CardChat = ({ user, onSelectUser }) => {
   return (
     <div
       className={`w-[98%] card-chat shadow-md flex items-center bg-white py-3 px-3 rounded-md justify-between mb-[6px] cursor-pointer
-      transition-transform duration-500 ${
+      transition-transform duration-300 ${
         isHovered ? "fixed scale-125 shadow-lg" : ""
       }`}
       style={

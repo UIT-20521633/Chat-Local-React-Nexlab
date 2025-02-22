@@ -1,17 +1,21 @@
 import { useSelector } from "react-redux";
 import CardChat from "../../components/CardChat/CardChat";
 import { selectCurrentUser, selectUsers } from "../../redux/user/userSlice";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 const SideBarChat = ({ onSelectUser }) => {
   const listUser = useSelector(selectUsers);
   const currentUser = useSelector(selectCurrentUser);
   const [searchTerm, setSearchTerm] = useState("");
-  const filteredUsers = listUser
-    .filter((user) => user.id !== currentUser.id) // Loại bỏ currentUser
-    .filter(
-      (user) => user.name.toLowerCase().includes(searchTerm.toLowerCase()) // Lọc theo tên
-    );
+  const filteredUsers = useMemo(
+    () =>
+      listUser.filter(
+        (user) =>
+          user.id !== currentUser.id &&
+          user.name.toLowerCase().includes(searchTerm.toLowerCase())
+      ),
+    [listUser, currentUser.id, searchTerm]
+  );
   return (
     <div className="w-2/5 flex items-start flex-col gap-3 pl-10">
       {/* Search */}
@@ -45,6 +49,7 @@ const SideBarChat = ({ onSelectUser }) => {
         style={{
           scrollbarWidth: "thin",
           scrollbarColor: "#9B9CA2 #F3F4F6",
+          backfaceVisibility: "hidden",
         }}>
         {filteredUsers.map((user) => (
           <CardChat key={user.id} user={user} onSelectUser={onSelectUser} />
